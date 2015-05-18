@@ -14,7 +14,12 @@ J = 0;
 %               You should set J to the cost.
 
 
+totalCost = 0;
+for i = 1:m
+    totalCost = totalCost + ((X(i,:) * theta) - y(i))^2;
+end 
 
+J = 1 / (2 * m) * totalCost;
 
 
 % =========================================================================

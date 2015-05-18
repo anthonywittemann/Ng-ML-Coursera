@@ -17,17 +17,16 @@ for iter = 1:num_iters
     %       of the cost function (computeCost) and gradient here.
     %
 
-    sizeX = size(X);
-    numFeatures = sizeX(2);
-    for j=1:numFeatures
+    temp = theta;
     
+    for j=1:size(X,2)
       totalCost = 0;
       for i = 1:m
-        totalCost = totalCost + ((theta' * X(i,2)) - y(i))*X(i,j);
-      end 
-
-      theta(j) = theta(j) - alpha / m * totalCost;
-    end
+        totalCost = totalCost + ((X(i,:) * temp) - y(i))*X(i,j);
+      end
+      
+      theta(j) = temp(j) - alpha / m * totalCost;
+    endfor
 
 
 
@@ -36,8 +35,8 @@ for iter = 1:num_iters
     % Save the cost J in every iteration    
     J_history(iter) = computeCost(X, y, theta);
     
-    fprintf(J_history(iter));
+    %fprintf(J_history(iter));
 
-end
+endfor
 
-end
+endfunction

@@ -26,8 +26,19 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
-
-
+% normalize each feature
+for feature=1:size(X, 2)
+  % sum of each column, then divide by number of training examples
+  mu = sum(X(:, feature))/size(X,1); 
+ 
+  
+  % standard deviation of feature column
+  sigma = std(X(:,feature));
+  
+  X_norm(:,feature) = (X(:,feature) - mu)/sigma;
+  fprintf('X_norm: %f \n', X_norm(:,feature));
+  
+endfor
 
 
 
@@ -36,4 +47,4 @@ sigma = zeros(1, size(X, 2));
 
 % ============================================================
 
-end
+endfunction

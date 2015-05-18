@@ -20,9 +20,16 @@ for iter = 1:num_iters
 
 
 
-
-
-
+    temp = theta;
+    
+    for j=1:size(X,2)
+      totalCost = 0;
+      for i = 1:m
+        totalCost = totalCost + ((X(i,:) * temp) - y(i))*X(i,j);
+      end
+      
+      theta(j) = temp(j) - alpha / m * totalCost;
+    endfor
 
 
 

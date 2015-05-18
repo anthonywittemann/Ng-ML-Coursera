@@ -15,7 +15,7 @@ J = 0;
 
 totalCost = 0;
 for i = 1:m
-    totalCost = totalCost + ((theta(1) + theta(2) * X(i,2)) - y(i))^2;
+    totalCost = totalCost + ((X(i,:) * theta) - y(i))^2;
 end 
 
 J = 1 / (2 * m) * totalCost;
