@@ -20,7 +20,24 @@ grad = zeros(size(theta));
 % Note: grad should have the same dimensions as theta
 %
 
+totalCost = 0;
+for i = 1:m
+    totalCost = totalCost + (-y(i)*log(sigmoid((X(i,:) * theta))) - ...
+    (1-y(i)*log(1-sigmoid((X(i,:) * theta)))));
+end 
 
+J = 1 / m * totalCost;
+
+temp = theta;
+    
+for j=1:size(X,2)
+  totalCost = 0;
+  for i = 1:m
+    totalCost = totalCost + (sigmoid((X(i,:) * temp)) - y(i))*X(i,j);
+  endfor
+      
+  gradient(j) = temp(j) - alpha / m * totalCost;
+endfor
 
 
 
@@ -29,4 +46,4 @@ grad = zeros(size(theta));
 
 % =============================================================
 
-end
+endfunction
