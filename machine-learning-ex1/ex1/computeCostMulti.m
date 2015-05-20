@@ -17,11 +17,11 @@ J = 0;
 totalCost = 0;
 for i = 1:m
     totalCost = totalCost + ((X(i,:) * theta) - y(i))^2;
-end 
+endfor
 
 J = 1 / (2 * m) * totalCost;
 
 
 % =========================================================================
 
-end
+endfunction

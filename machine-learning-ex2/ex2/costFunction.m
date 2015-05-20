@@ -28,6 +28,8 @@ end
 
 J = 1 / m * totalCost;
 
+
+
 temp = theta;
     
 for j=1:size(X,2)
@@ -36,11 +38,8 @@ for j=1:size(X,2)
     totalCost = totalCost + (sigmoid((X(i,:) * temp)) - y(i))*X(i,j);
   endfor
       
-  gradient(j) = temp(j) - alpha / m * totalCost;
+  gradient(j) = temp(j) - 1 / m * totalCost;
 endfor
-
-
-
 
 
 
