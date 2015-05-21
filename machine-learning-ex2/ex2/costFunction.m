@@ -42,10 +42,10 @@ for j=1:size(X,2)
     totalCost = totalCost + (sigmoid(X(i,:) * temp) - y(i))*X(i,j);
   endfor
       
-  gradient(j) = temp(j) - 1 / m * totalCost;
+  grad(j) = 1 / m * totalCost;
 endfor
 
-fprintf("Gradient: %f \n", gradient);
+fprintf("Gradient: %f \n", grad);
 
 
 % =============================================================
