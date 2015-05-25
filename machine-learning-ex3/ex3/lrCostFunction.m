@@ -37,6 +37,10 @@ grad = zeros(size(theta));
 %
 
 
+J = 1 / m * sum(-y.*log(sigmoid(theta'.*X)) - ...
+                ((1-y).*log(1-(sigmoid(theta'.*X)))));
+
+fprintf("J: %f \n", J);
 
 
 
