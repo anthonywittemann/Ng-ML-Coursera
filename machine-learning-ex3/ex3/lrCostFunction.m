@@ -53,9 +53,9 @@ fprintf("J: %f \n", J);
       
 %  grad(j) = 1 / m * totalCost;
 %endfor
-
-grad = 1 / m * (X'*(sigmoid(X*temp)-y)); %(unregularized gradient for logistic regression)
 temp = theta;
+grad = 1 / m * (X'*(sigmoid(X*temp)-y)); %(unregularized gradient for logistic regression)
+
 temp(1) = 0; % because we don't add anything for j = 0
 grad = grad + sum(lambda / m .* temp(:, 2:end));
 
