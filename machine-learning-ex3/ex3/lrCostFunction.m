@@ -43,11 +43,11 @@ theta(1) = 0;
 J = 1 / m * sum((-y.*log(h)) .- ((1.-y).*log(1.-h))) + ...
             (lambda / (2 * m) * sum(theta.^2));
 
-fprintf("J: %f \n", J);
+%fprintf("J: %f \n", J);
 
 grad = (1 / m) * (X'*(h .- y) + lambda*theta);
 
-fprintf("Gradient: %f \n", grad);
+%fprintf("Gradient: %f \n", grad);
 
 
 % =============================================================
