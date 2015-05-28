@@ -55,9 +55,9 @@ fprintf("J: %f \n", J);
 %endfor
 temp = theta;
 grad = 1 / m * (X'*(sigmoid(X*temp)-y)); %(unregularized gradient for logistic regression)
-
+printf("Unregularized Gradient: %f \n", grad)
 temp(1) = 0; % because we don't add anything for j = 0
-grad = grad + sum(lambda / m .* temp(:, 2:end));
+grad(:, 2:end) = grad(:, 2:end) + (lambda / m * temp(:, 2:end));
 
 fprintf("Gradient: %f \n", grad);
 
