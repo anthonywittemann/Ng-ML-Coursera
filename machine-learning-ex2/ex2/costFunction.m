@@ -21,14 +21,18 @@ grad = zeros(size(theta));
 %
 
 totalCost = 0;
-for i = 1:m
-    totalCost = totalCost + (-y(i)*log(sigmoid((X(i,:) * theta))) -
-    ((1-y(i))*log(1-sigmoid((X(i,:) * theta)))));
-end 
+%for i = 1:m
+%    totalCost = totalCost + (-y(i)*log(sigmoid((X(i,:) * theta))) -
+%    ((1-y(i))*log(1-sigmoid((X(i,:) * theta)))));
+%end 
+
+% vectorized implementation
+J = 1 / m * sum((-y.*log(sigmoid(X*theta))) - ...
+                ((1-y).*log(1-(sigmoid(X*theta)))))
 
 % fprintf("Total Cost: %f \n", totalCost); 
 
-J = 1 / m * totalCost;
+%J = 1 / m * totalCost;
 
 fprintf("J: %f \n", J);
 
