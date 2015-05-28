@@ -18,24 +18,24 @@ grad = zeros(size(theta));
 %               derivatives of the cost w.r.t. each parameter in theta
 
 
-totalCost = 0;
-n = size(theta, 1);
-for i = 1:m
-    regCost = 0;
-    for j=2:n
-      regCost = regCost + theta(j)^2;
-    endfor 
+%totalCost = 0;
+%n = size(theta, 1);
+%for i = 1:m
+%    regCost = 0;
+%    for j=2:n
+%      regCost = regCost + theta(j)^2;
+%    endfor 
 
-    totalCost = totalCost + ((-y(i)*log(sigmoid((X(i,:) * theta))) -
-    ((1-y(i))*log(1-sigmoid((X(i,:) * theta))))) + lambda/(2*m) * regCost);
-end 
+%    totalCost = totalCost + ((-y(i)*log(sigmoid((X(i,:) * theta))) -
+%    ((1-y(i))*log(1-sigmoid((X(i,:) * theta))))) + lambda/(2*m) * regCost);
+%end 
 
-J = 1 / m * totalCost;
+%J = 1 / m * totalCost;
 
 % vectorized implementation of regularized cost function
-%J = 1 / m * sum((-y.*log(sigmoid(X*theta))) - ...
-%                ((1-y).*log(1-(sigmoid(X*theta))))) + ...
-%            lambda / (2 * m) * sum(theta(2:end)).^2;
+J = 1 / m * sum((-y.*log(sigmoid(X*theta))) - ...
+                ((1-y).*log(1-(sigmoid(X*theta))))) + ...
+            lambda / (2 * m) * sum(theta(2:end)).^2;
 
 fprintf("J: %f \n", J);
 
@@ -64,7 +64,7 @@ temp = theta;
 grad = 1 / m * (X'*(sigmoid(X*temp)-y)); %(unregularized gradient for logistic regression)
 %printf("Unregularized Gradient: %f \n", grad)
 temp(1) = 0; % because we don't add anything for j = 0
-grad(:, 2:end) = grad(:, 2:end) + (lambda / m * temp(:, 2:end));
+grad = grad + (lambda / m * temp);
 
 
 %fprintf("Gradient: %f \n", grad);
