@@ -31,6 +31,8 @@ X = [ones(m, 1) X];
 %       
 
 H = sigmoid(X*all_theta');
+%fprintf("H Rows: %f \n", size(H, 1));
+%fprintf("H Columns: %f \n", size(H, 2));
 [predict_max, index_max] = max(H, [], 2);
 p = index_max;
 
