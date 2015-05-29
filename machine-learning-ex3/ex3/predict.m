@@ -34,13 +34,14 @@ A2 = A2(:, [end, 1:end-1]);
 fprintf("Size A2: %f \n", size(A2))
 
 A3 = sigmoid(Theta2 * A2');
-A3(:, end+1) = 0; % adding the bias unit
-A3 = A3(:, [end, 1:end-1]);
+%A3 = A3';
 fprintf("Size A3: %f \n", size(A3))
-A3 = A3';
 
-index_max = max(A3, 2);
-p = index_max;
+for i=1:m
+  index_max = max(A3(i),[], 2);
+  p(i) = index_max;
+endfor
+
 
 
 
