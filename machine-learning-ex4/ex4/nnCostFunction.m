@@ -46,7 +46,7 @@ X = [ones(m,1) X];
 a2 = sigmoid(Theta1 * X');
 a2 = [ones(m,1) a2'];
 
-h = sigmoid(Theta2 * a2'); % hypothesis equals z3
+h = sigmoid(Theta2 * a2'); % hypothesis equals a3
 
 % y(k) - recode the labels as vectors containing only values 0 or 1 
 % (page 5 of ex4.pdf)
@@ -57,6 +57,19 @@ endfor
 
 % cost function for nn with double summation
 J = (1/m) * sum( sum((-yk) .* log(h) - (1-yk) .* log(1-h)) );
+
+
+% regularization for cost function
+% Note that the bias shouldn't be regularized
+% For matrices Theta1 and Theta2, this is the first column of each matrix.
+t1 = Theta1(:, 2:size(Theta1,2));
+t2 = Theta2(:, 2:size(Theta2,2));
+
+% regularization formula
+reg = lambda / (2*m) * (sum(sum(t1.^ 2)) + sum(sum(t2.^ 2)));
+
+% cost function + regularization
+J = J + reg;
 
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
@@ -73,7 +86,40 @@ J = (1/m) * sum( sum((-yk) .* log(h) - (1-yk) .* log(1-h)) );
 %         Hint: We recommend implementing backpropagation using a for-loop
 %               over the training examples if you are implementing it for the 
 %               first time.
-%
+
+
+for t=1:m,
+
+	% dummie pass-by-pass
+	% forward prop
+
+	a1 = X(t, :); % X already has bias
+	z2 = Theta1 * a1';
+
+	a2 = sigmoid(z2);
+	a2 = [1; a2]; % add bias
+
+	z3 = Theta2 * a2;
+
+	a3 = sigmoid(z3); % final activation layer a3 = hypothesis
+
+	
+	% back prop	
+	
+	z2=[1; z2]; % bias
+
+	delta_3 = a3 - yk(:,t); % y(k) - getting columns of t element
+	delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z2);
+
+	% skipping sigma2(0) bias unit 
+	delta_2 = delta_2(2:end); 
+
+	Theta2_grad = Theta2_grad + delta_3 * a2';
+	Theta1_grad = Theta1_grad + delta_2 * a1;
+
+end;
+
+
 % Part 3: Implement regularization with the cost function and gradients.
 %
 %         Hint: You can implement this around the code for
