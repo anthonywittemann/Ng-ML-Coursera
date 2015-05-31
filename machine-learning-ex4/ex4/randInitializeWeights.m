@@ -17,14 +17,15 @@ W = zeros(L_out, 1 + L_in);
 %               training the neural network.
 %
 % Note: The first row of W corresponds to the parameters for the bias units
-%
 
+% One effective strategy for choosing εinit 
+% is to base it on the # of units in the network.
+% A good choice of εinit is εinit = sqrt(6)/(Lin + Lout) 
+% where Lin = sl and Lout = sl+1 are Lin +Lout
+% the # of units in the layers adjacent to Θ(l)
+epsilon_init = 0.12;
 
-
-
-
-
-
+W = rand(L out, 1 + L in) * (2 * epsilon_init) − epsilon_init;
 
 
 % =========================================================================
