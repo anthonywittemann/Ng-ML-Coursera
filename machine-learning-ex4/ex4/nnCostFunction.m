@@ -90,10 +90,9 @@ J = J + reg;
 
 for t=1:m,
 
-	% dummie pass-by-pass
 	% forward prop
 
-	a1 = X(t, :); % X already has bias
+	a1 = X(t, :); % X already has bias 
 	z2 = Theta1 * a1';
 
 	a2 = sigmoid(z2);
@@ -106,14 +105,19 @@ for t=1:m,
 	
 	% back prop	
 	
+  % step 1 - from ex4.pdf
 	z2=[1; z2]; % bias
 
+  % step 2 - from ex4.pdf
 	delta_3 = a3 - yk(:,t); % y(k) - getting columns of t element
-	delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z2);
+	
+  % step 3 - from ex4.pdf
+  delta_2 = (Theta2' * delta_3) .* sigmoidGradient(z2);
 
-	% skipping sigma2(0) bias unit 
-	delta_2 = delta_2(2:end); 
+	% step 4 - from ex4.pdf
+	delta_2 = delta_2(2:end); % skipping sigma2(0) bias unit
 
+  % step 5 - from ex4.pdf
 	Theta2_grad = Theta2_grad + delta_3 * a2';
 	Theta1_grad = Theta1_grad + delta_2 * a1;
 
