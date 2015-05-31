@@ -117,11 +117,14 @@ for t=1:m,
 	% step 4 - from ex4.pdf
 	delta_2 = delta_2(2:end); % skipping sigma2(0) bias unit
 
-  % step 5 - from ex4.pdf
 	Theta2_grad = Theta2_grad + delta_3 * a2';
 	Theta1_grad = Theta1_grad + delta_2 * a1;
 
 end;
+
+% step 5 - from ex4.pdf
+Theta1_grad = Theta1_grad ./ m;
+Theta2_grad = Theta2_grad ./ m;
 
 
 % Part 3: Implement regularization with the cost function and gradients.
