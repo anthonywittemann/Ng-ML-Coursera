@@ -39,12 +39,25 @@ Theta2_grad = zeros(size(Theta2));
 %         cost function computation is correct by verifying the cost
 %         computed in ex4.m
 
-% TODO change this to work for nn cost function
-h = sigmoid(X * theta);
-theta(1) = 0;
+X = [ones(m,1) X];
 
-J = 1 / m * sum((-y.*log(h)) .- ((1.-y).*log(1.-h))) + ...
-            (lambda / (2 * m) * sum(theta.^2));
+% forward propagation
+% a1 = X; 
+a2 = sigmoid(Theta1 * X');
+a2 = [ones(m,1) a2'];
+
+h = sigmoid(Theta2 * a2'); % hypothesis equals z3
+
+% y(k) - recode the labels as vectors containing only values 0 or 1 
+% (page 5 of ex4.pdf)
+yk = zeros(num_labels, m); 
+for i=1:m,
+  yk(y(i),i) = 1;
+endfor
+
+% cost function for nn with double summation
+J = (1/m) * sum( sum((-yk) .* log(h) - (1-yk) .* log(1-h)) );
+
 
 % Part 2: Implement the backpropagation algorithm to compute the gradients
 %         Theta1_grad and Theta2_grad. You should return the partial derivatives of
