@@ -19,16 +19,18 @@ grad = zeros(size(theta));
 %               You should set J to the cost and grad to the gradient.
 %
 
+% vectorized cost funciton for linear regression
+h = X * theta
+
+J = 1/(2*m) * sum((h - y).^2) + ...
+        lambda/(2*m) * sum(theta(2:end).^2);
 
 
-
-
-
-
-
-
-
-
+% vectorized gradient
+grad = 1 / m * (X' * sum(h - y)); % unregularized gradient for linear regression
+temp = theta;
+temp(1) = 0; % because we don't regularize for j = 0
+grad = grad + (lambda/m * temp); % add regularization
 
 % =========================================================================
 
