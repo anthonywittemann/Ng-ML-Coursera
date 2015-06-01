@@ -27,7 +27,7 @@ J = 1/(2*m) * sum((h - y).^2) + ...
 
 
 % vectorized gradient
-grad = 1 / m * (X' * sum(h - y)); % unregularized gradient for linear regression
+grad = 1 / m * (X' * (h - y)); % unregularized gradient for linear regression
 temp = theta;
 temp(1) = 0; % because we don't regularize for j = 0
 grad = grad + (lambda/m * temp); % add regularization
