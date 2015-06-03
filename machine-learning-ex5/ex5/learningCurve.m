@@ -40,26 +40,25 @@ error_val   = zeros(m, 1);
 %       Do note that you will still need to use lambda when running
 %       the training to obtain the theta parameters.
 %
-% Hint: You can loop over the examples with the following:
-%
-%       for i = 1:m
-%           % Compute train/cross validation errors using training examples 
-%           % X(1:i, :) and y(1:i), storing the result in 
-%           % error_train(i) and error_val(i)
-%           ....
-%           
-%       end
-%
 
-% ---------------------- Sample Solution ----------------------
+for i = 1:m
+	
+  % the subset of data points
+	Xtrain = X(1:i,:); 
+	ytrain = y(1:i);
+	
+	% use the trainLinearReg function to find the θ parameters
+	theta = trainLinearReg(Xtrain, ytrain, lambda);	
 
+	% Compute train/cross validation errors using training examples
+  % lambda = 0 b/c we're using it to compute the training and cross validation error
+	[JTrain,gradTrain] = linearRegCostFunction(Xtrain,ytrain,theta,0); 
+	[JVal,gradVal] = linearRegCostFunction(Xval,yval,theta,0);
 
-
-
-
-
-
-% -------------------------------------------------------------
+  % store training and validation errors in return values 
+  errorTrain(i) = JTrain;  
+  errorVal(i) = JVal;
+end
 
 % =========================================================================
 
