@@ -54,10 +54,11 @@ for i = 1:m
   % lambda = 0 b/c we're using it to compute the training and cross validation error
 	[JTrain,gradTrain] = linearRegCostFunction(Xtrain,ytrain,theta,0); 
 	[JVal,gradVal] = linearRegCostFunction(Xval,yval,theta,0);
-
+  
+  
   % store training and validation errors in return values 
-  errorTrain(i) = JTrain;  
-  errorVal(i) = JVal;
+  error_train(i) = JTrain;  
+  error_val(i) = JVal;
 end
 
 % =========================================================================
