@@ -23,10 +23,25 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+minPredictionError = 100000; %some arbitrarily high value
+possibleValues = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 
-
-
-
+for c_i = 1:size(possibleValues, 2)
+  for sigma_i = 1:size(possibleValues, 2)
+    model = svmTrain(X, y, possibleValues(c_i), @(x1, x2) gaussianKernel(x1, x2, possibleValues(sigma_i))); 
+    
+    predictions = svmPredict(model, Xval);
+    
+    predictionError = mean(double(predictions ~= yval));
+    
+    if(predictionError < minPredictionError)
+      minPredictionError = predictionError;
+      C = possibleValues(c_i);
+      sigma = possibleValues(sigma_i);
+    endif
+    
+  endfor
+endfor
 
 
 % =========================================================================
