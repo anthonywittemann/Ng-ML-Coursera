@@ -16,9 +16,12 @@ sim = 0;
 %
 %
 
+sumSquaredDiff = 0;
+for i = 1:size(x1)
+  sumSquaredDiff = sumSquaredDiff + (x1(i) - x2(i))^2;
+endfor
 
-
-
+sim = exp( -sumSquaredDiff / (2 * sigma^2) );
 
 
 % =============================================================
