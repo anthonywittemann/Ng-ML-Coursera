@@ -105,6 +105,8 @@ pause;
 
 fprintf('\nRunning K-Means clustering on pixels from an image.\n\n');
 
+% Can modify here to load my own image ||||||||||||||||||||||||||||||||||||
+
 %  Load an image of a bird
 A = double(imread('bird_small.png'));
 
@@ -125,6 +127,9 @@ X = reshape(A, img_size(1) * img_size(2), 3);
 % You should try different values of K and max_iters here
 K = 16; 
 max_iters = 10;
+
+% |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
 
 % When using K-Means, it is important the initialize the centroids
 % randomly. 
