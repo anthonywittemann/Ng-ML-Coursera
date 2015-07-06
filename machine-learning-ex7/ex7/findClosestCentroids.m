@@ -21,10 +21,20 @@ idx = zeros(size(X,1), 1);
 % Note: You can use a for-loop over the examples to compute this.
 %
 
+for i=1:size(X,1)
+  x = X(i, :);
+  smallestEuclidianDistance = Inf;
+  
+  for j=1:K
+    mu = centroids(j, :);
+    euclidianDistance = dot(x - mu, x - mu);
+    if(euclidianDistance < smallestEuclidianDistance)
+      smallestEuclidianDistance = euclidianDistance;
+      idx(i) = j;
+    endif
+  endfor
 
-
-
-
+endfor
 
 
 % =============================================================

@@ -26,12 +26,24 @@ centroids = zeros(K, n);
 % Note: You can use a for-loop over the centroids to compute this.
 %
 
+% yes, this an inefficient implementation, but it's more readable
 
+numDataPointsInCentroids = zeros(K,1); 
 
+for i=1:m
+  for k=1:K
+  
+    if(idx(i) == k)
+      centroids(k, :) = centroids(k, :) + X(i, :);
+      numDataPointsInCentroids(k) = numDataPointsInCentroids(k) + 1;
+    endif
+    
+  endfor
+endfor
 
-
-
-
+for k = 1 : K
+  centroids(k, :) = centroids(k, :) ./ numDataPointsInCentroids(k);
+endfor
 
 % =============================================================
 
